@@ -1,0 +1,10 @@
+{
+  "files.associations": {
+    "iostream": "cpp"
+  },
+  "options": {
+    "shell": {
+      "executable": "C:\\Program Files\\Git\\bin\\bash.exe"
+    }
+  }
+}

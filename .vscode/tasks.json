@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Build Neuron App",
+      "type": "shell",
+      "command": "g++",
+      "args": [
+        "main.cpp",
+        "src/core/Neuron.cpp",
+        "-o",
+        "build/Neuron.exe",
+        "-I${workspaceFolder}\\include",
+        "-L${workspaceFolder}\\lib",
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$gcc"],
+      "options": {
+        "shell": {
+          "executable": "C:\\Windows\\System32\\cmd.exe",
+          "args": ["/d", "/c"]
+        }
+      }
+    }
+  ]
+}
