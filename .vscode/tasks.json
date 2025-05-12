@@ -7,6 +7,8 @@
       "command": "g++",
       "args": [
         "main.cpp",
+        "src/core/NeuralNetwork.cpp",
+        "src/core/Layer.cpp",
         "src/core/Neuron.cpp",
         "-o",
         "build/Neuron.exe",

@@ -1,35 +1,20 @@
-#ifndef NN_H
-#define NN_H
+#ifndef NEURON_H
+#define NEURON_H
 
-#include <iostream>
 #include <vector>
-#include <cmath>
-#include <cstdlib>
-#include <ctime>
-
-// Sigmoid activation and derivative
-double sigmoid(double x);
-double sigmoid_derivative(double x);
+#include <fstream>
 
 class Neuron {
-private:
-    double input[2];
-    double hidden[2];
-    double output;
-
-    double weights_input_hidden[2][2];
-    double weights_hidden_output[2];
-    double bias_hidden[2];
-    double bias_output;
-
-    double learning_rate = 0.5;
-
 public:
-    Neuron();
-    static double rand_weight();
+    std::vector<double> weights;
+    double bias;
+    double output;
+    double delta;
 
-    double train(const double in[2], double target);
-    double predict(const double in[2]);
+    Neuron(int inputSize);
+    double feedForward(const std::vector<double>& inputs);
+    void save(std::ofstream& out);
+    void load(std::ifstream& in);
 };
 
-#endif // NN_H
+#endif

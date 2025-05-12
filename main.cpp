@@ -1,30 +1,25 @@
-
-#include "src/core/Neuron.h"
+#include "src/core/NeuralNetwork.h"
 #include <iostream>
-using namespace std;
 
 int main() {
-    Neuron nn;
+    NeuralNetwork nn;
+    std::vector<std::vector<double>> inputs = {{0, 0}, {0, 1}, {1, 0}, {1, 1}};
+    std::vector<std::vector<double>> targets = {{0}, {1}, {1}, {0}};
 
-    // XOR dataset
-    double data[4][2] = {{0,0},{0,1},{1,0},{1,1}};
-    double labels[4] = {0, 1, 1, 0};
+    std::cout << "Select option: \n1. Train and Save Model\n2. Load and Predict\n> ";
+    int choice;
+    std::cin >> choice;
 
-    // Train
-    for (int epoch = 0; epoch < 10000; ++epoch) {
-        double loss = 0;
-        for (int i = 0; i < 4; ++i) {
-            loss += nn.train(data[i], labels[i]);
+    if (choice == 1) {
+        nn.train(inputs, targets, 100000, 0.5);
+        nn.saveModel("xor_model.bin");
+        std::cout << "Model trained and saved.\n";
+    } else if (choice == 2) {
+        nn.loadModel("xor_model.bin");
+        for (auto& input : inputs) {
+            auto output = nn.feedForward(input);
+            std::cout << input[0] << " XOR " << input[1] << " = " << output[0] << std::endl;
         }
-        if (epoch % 500 == 0) {
-            cout << "Epoch " << epoch << ", Loss: " << loss << endl;
-        }
-    }
-
-    // Test
-    for (int i = 0; i < 4; ++i) {
-        double pred = nn.predict(data[i]);
-        cout << "Input: " << data[i][0] << ", " << data[i][1] << " => Predicted: " << pred << endl;
     }
 
     return 0;
